@@ -1,4 +1,3 @@
-// Express server on port 8000
 import express from 'express';
 import morgan from 'morgan';
 import ip from 'ip';
@@ -18,6 +17,7 @@ const app = express();
 app.use(morgan('combined'));
 
 pavlok.init(process.env.pavlok_client_id, process.env.pavlok_client_secret, {
+  // Trying to use the new API, which doesn't appear to work :( Comment this out if you want to use the old API
   apiUrl: 'https://app.pavlok.com',
   verbose: true,
   app: app,
@@ -129,6 +129,7 @@ app.get('/auth/pavlok/logout', function (req, res) {
 
 app.get('/pattern', function (req, res) {
   try {
+    // Pattern doesn't appear to work?
     pavlok.pattern({
       request: req,
       pattern: ['beep', 'vibrate', 'zap'],
