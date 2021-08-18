@@ -1,4 +1,5 @@
 import { Telegraf } from 'telegraf';
+Error.stackTraceLimit = Infinity;
 
 export default function telegramInit (pavlok, db) {
   const bot = new Telegraf(process.env.telegram_token);
@@ -56,7 +57,7 @@ export default function telegramInit (pavlok, db) {
       const pavlokId = db.getData(`/telegram/${args.target}/pavlok_id`);
       args.token = db.getData(`/pavlok/${pavlokId}/access_token`);
     } catch (e) {
-      replyAndLog(ctx, `User @${args.target} does not appear to be registered\\.`);
+      replyAndLog(ctx, `User \`@${args.target}\` does not appear to be registered\\.`);
       return;
     }
     try {
@@ -66,7 +67,7 @@ export default function telegramInit (pavlok, db) {
         message: args.message,
         callback: (err, data) => {
           if (err) console.log(err, data);
-          replyAndLog(ctx, `${commandToFriendlyMap[args.command]} @${args.target} at intensity \`${args.intensity}\` with message \`${args.message}\``);
+          replyAndLog(ctx, `${commandToFriendlyMap[args.command]} \`@${args.target}\` at intensity \`${args.intensity}\` with message \`${args.message}\``);
         }
       });
     } catch (e) {

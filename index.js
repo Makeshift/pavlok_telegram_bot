@@ -32,8 +32,8 @@ telegramInit(pavlok, db);
 app.get('/auth/pavlok/capture', async (req, res) => {
   try {
     db.push(`/pavlok/${req.session.pavlok_user.user.id}`, req.session.pavlok_user);
-    pavlok.me({ request: req }, async (err, data) => {
-      if (err) console.log(err);
+    pavlok.me({ request: req }, async (success, data) => {
+      if (!success) console.log(data);
       db.push(`/pavlok/${req.session.pavlok_user.user.id}/user`, JSON.parse(data.body));
       await doTelegramPavlokSync(req);
       res.redirect('/');
