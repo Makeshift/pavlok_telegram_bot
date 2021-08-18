@@ -90,7 +90,7 @@ export default function telegramInit (pavlok, db) {
   
 All of the above arguments are optional, and will default to the user who invoked the command if a target is not specified\\.
 
-If you own a Pavlok device and wish to have it controllable via this bot, you can sign up at: ${process.env.callback_root}/ to associate your Telegram and Pavlok accounts.
+If you own a Pavlok device and wish to have it controllable via this bot, you can sign up at: ${process.env.callback_root.replaceAll('.', '\\.')}/ to associate your Telegram and Pavlok accounts\\.
   `));
 
   bot.launch();
